@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .container {
+        background-color: cadetblue;
+        width: 30%;
+        margin: auto;
+        margin-top: 100px;
+        display: grid;
+        grid-template-areas:
+            "heading"
+            "input"
+            "button";
+        justify-items: center;
+        gap: 5px;
+    }
+
+    .heading {
+        grid-area: heading;
+    }
+
+    .InputChapter {
+        grid-area: input;
+    }
+
+    #addBtn {
+        width: 90px;
+        grid-area: button;
+        /* justify-self: center;  */
+    }
+
+    .Chapter {
+        background-color: rgb(231, 106, 106);
+        width: 30%;
+        display: grid;
+        margin: auto;
+        margin-top: 50px;
+        grid-template-columns: auto auto;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        border-radius: 5px;
+    }
+
+    #removeBtn {
+        height: 30px;
+    }
+</style>
+
+<body>
+
+    <div class="container">
+        <h1 class="heading">Adding Chapters</h1>
+        <input type="text" class="InputChapter" required="">
+        <button id="addBtn">Add</button>
+    </div>
+
+    <!-- <div class="parent">
+        <h3 id="ChapterName">${input}</h3>
+        <button id="removeBtn" onclick="RemoveChapterFunction()">Remove</button>
+    </div> -->
+</body>
+
+<script>
+    let AddingChapterBtn = document.getElementById('addBtn');
+
+    function AddChapterFunction() {
+        let input = document.querySelector('.InputChapter').value;
+
+        if (input === "") {
+            alert('Please add a name');
+        } else {
+            let Create_Chapter = document.createElement('div');
+            Create_Chapter.classList.add('Chapter');
+            Create_Chapter.innerHTML = `
+            <div class="parent">
+        <h3 id="ChapterName">${input}</h3>
+        <button id="removeBtn" onclick="RemoveChapterFunction(this)">Remove</button>
+    </div>`;
+            document.body.appendChild(Create_Chapter);
+
+            // let RemovingChapterBtn=Create_Chapter.querySelector('#removeBtn');
+
+
+        }
+    }
+    function RemoveChapterFunction(currentElement) {
+        console.log(currentElement);
+        currentElement.parentElement.remove();
+        // currentElement.remove();
+    }
+
+    AddingChapterBtn.addEventListener('click', AddChapterFunction);
+</script>
+
+</html>
